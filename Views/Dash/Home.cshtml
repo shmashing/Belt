@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Home Page";
+    var user = ViewBag.user;
+    var auctions = ViewBag.auctions;
+}
+
+<a href="/logout">Sign Out</a>
+<h5>Welcome, @user.FirstName </h5>
+
+<table>
+    <th>Product</th>
+    <th>Seller</th>
+    <th>Top Bid</th>
+    <th>Time Remaining</th>
+    <th>Action</th>
+
+    @{
+        foreach (var auction in auctions){
+            @if(auction.TimeRemaining.Days > 0 || auction.TimeRemaining.Hours > 0){
+                <tr>
+                    <td><a href="show_auction/@auction.Id">@auction.Product<a></td>
+                    <td>@auction.User.FirstName</td>
+                    <td>$@auction.Bid.ToString("0.00")</td>
+                    @if(auction.TimeRemaining.Days == 0){
+                        <td>@auction.TimeRemaining.Hours hours</td>
+                    } else {
+                        <td>@auction.TimeRemaining.Days days</td>
+                    }
+                    @if(auction.UserId == user.Id){
+                        <td><a href="delete/@auction.Id">Delete</a></td>
+                    }
+                </tr>
+            }
+        }
+    }
+</table>
+
+<a href="new_auction">Create New Auction</a>
+<h5>Your Wallet: $@user.Wallet.ToString("0.00")</h5>

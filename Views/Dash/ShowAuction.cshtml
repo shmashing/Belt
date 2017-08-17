@@ -1,0 +1,37 @@
+@{
+    ViewData["Title"] = "Home Page";
+    var auction = ViewBag.auction;
+    var bid = ViewBag.bid;
+}
+<a href="/home">Home</a>
+<a href="/logout">Sign Out</a>
+
+<h4>@auction.Product</h4>
+<h6>Seller: @auction.User.FirstName @auction.User.LastName</h6>
+@{
+    if(auction.TimeRemaining.Days == 0){
+        <h5>Time Remaining: @auction.TimeRemaining.Hours hours</h5>
+    } else {
+        <h5>Time Remaining: @auction.TimeRemaining.Days days</h5>
+    }
+}
+<h5>Description:</h5>
+<h6>@auction.Description</h6>
+@{
+    if(bid != null){
+        <h5>Current Highest Bid: $@auction.Bid.ToString("0.00")</h5>
+        <h5>Made By: @bid.User.FirstName @bid.User.LastName</h5>
+    } else {
+        <h5>Starting Bid: $@auction.Bid.ToString("0.00") </h5>
+    }
+}
+
+<form action="/add_bid/@auction.Id" method="post">
+    <input type="number" step="any" min=@auction.Bid name="bidAmount" placeholder="Your bid here..">
+    <input type="submit" value="Bid">
+    @{
+        if(ViewBag.bidError != null){
+            <p>@ViewBag.bidError</p>
+        }
+    }
+</form>

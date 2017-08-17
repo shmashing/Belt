@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Home Page";
+    var auction = ViewBag.auction;
+}
+<a href="/home">Home</a>
+<a href="/logout">Sign Out</a>
+
+<h4>Add A New Auction!</h4>
+
+@model BeltExam.Models.AuctionViewModel
+<form asp-action="MakeAuction" asp-controller="Dash">
+    <table>
+        <tr>
+            <td><input asp-for="Product" placeholder="Product Name"></td>
+            <td><span asp-validation-for="Product"></span></td>
+        </tr>
+        <tr>
+            <td><textarea asp-for="Description" placeholder="Description" cols=60></textarea></td>
+            <td><span asp-validation-for="Description"></span></td>
+        </tr>
+        <tr>
+            <td>$<input asp-for="Bid" placeholder="Starting Bid" type="number" min="0" step="any"></td>
+            <td><span asp-validation-for="Bid"></span></td>
+            <td><span>@ViewBag.BidError</span></td>
+        </tr>
+        <tr>
+            <td>Ending Date: <input asp-for="EndDate" type="date"></td>
+            <td><span asp-validation-for="EndDate"></span></td>
+            <td><span>@ViewBag.DateError</span></td>
+        </tr>
+    </table>
+    <input type="submit" value="Add Auction">
+</form>

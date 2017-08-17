@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="login_box">
+    <form action="login" method="POST">
+
+        <table>
+            @{
+                if(ViewBag.loginError != null){
+                    <tr><td><span> @ViewBag.loginError </span></td></tr>
+                }
+            }
+            <tr>
+                <td><input type="text" placeholder="Username" name="username"></td>
+            </tr>
+            <tr>
+                <td><input type="password" placeholder="Password" name="password"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Sign in">
+    </form>
+
+    <a href="register">Not a user? Register now</a>
+</div>

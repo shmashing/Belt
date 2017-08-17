@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model BeltExam.Models.RegisterViewModel
+
+<div class="register_box">
+    <form asp-action="RegisterUser" asp-controller="Home" method="POST">
+        <table>
+            <tr>
+                <td><input placeholder="First Name" asp-for="FirstName"></td>
+                <td><span asp-validation-for="FirstName"></span></td>
+            </tr>
+            <tr>
+                <td><input placeholder="Last Name" asp-for="LastName"></td>
+                <td><span asp-validation-for="LastName"></span></td>
+            </tr>
+            <tr>
+                <td><input placeholder="Username" asp-for="Username"></td>
+                <td><span asp-validation-for="Username"></span></td>
+                @{
+                    if(ViewBag.UserNameError != null){
+                        <td><span> @ViewBag.UserNameError </span></td>
+                    }
+                }
+            </tr>
+            <tr>
+                <td><input placeholder="Email" asp-for="Email"></td>
+                <td><span asp-validation-for="Email"></span></td>
+            </tr>
+            <tr>
+                <td><input placeholder="Password" asp-for="Password"></td>
+                <td><span asp-validation-for="Password"></span></td>
+            </tr>
+            <tr>
+                <td><input placeholder="Confirm Password" asp-for="PasswordConf"></td>
+                <td><span asp-validation-for="PasswordConf"></span></td>
+            </tr>
+        </table>
+        <input type="submit" value="Register">
+    </form>
+
+    <a href="/">Already registered? Sign on</a>
+</div>
